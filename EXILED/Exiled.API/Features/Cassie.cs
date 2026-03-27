@@ -30,7 +30,7 @@ namespace Exiled.API.Features
     public static class Cassie
     {
         /// <summary>
-        /// Gets a value indicating whether C.A.S.S.I.E is currently announcing. Does not include decontamination or Alpha Warhead Messages.
+        /// Gets a value indicating whether C.A.S.S.I.E is currently announcing. Does not include client side announcements such as decontamination or Alpha Warhead Messages.
         /// </summary>
         public static bool IsSpeaking => CassieAnnouncementDispatcher.AllAnnouncements.Count != 0;
 
@@ -79,7 +79,8 @@ namespace Exiled.API.Features
         /// <param name="isHeld">Indicates whether C.A.S.S.I.E has to hold the message.</param>
         /// <param name="isNoisy">Indicates whether C.A.S.S.I.E has to make noises during the message.</param>
         /// <param name="isSubtitles">Indicates whether C.A.S.S.I.E has to make subtitles.</param>
-        public static void DelayedMessage(string message, float delay, bool isHeld = false, bool isNoisy = true, bool isSubtitles = false) =>
+        /// <returns><see cref="CoroutineHandle"/> that can be manipulated.</returns>
+        public static CoroutineHandle DelayedMessage(string message, float delay, bool isHeld = false, bool isNoisy = true, bool isSubtitles = false) =>
             Timing.CallDelayed(delay, () => new CassieAnnouncement(new CassieTtsPayload(message, isSubtitles, isHeld), 0f, isNoisy ? 1 : 0).AddToQueue());
 
         /// <summary>
@@ -89,7 +90,8 @@ namespace Exiled.API.Features
         /// <param name="delay">The seconds that have to pass before reproducing the message.</param>
         /// <param name="glitchChance">The chance of placing a glitch between each word.</param>
         /// <param name="jamChance">The chance of jamming each word.</param>
-        public static void DelayedGlitchyMessage(string message, float delay, float glitchChance, float jamChance) =>
+        /// <returns><see cref="CoroutineHandle"/> that can be manipulated.</returns>
+        public static CoroutineHandle DelayedGlitchyMessage(string message, float delay, float glitchChance, float jamChance) =>
             Timing.CallDelayed(delay, () => new CassieAnnouncement(new CassieTtsPayload(CassieGlitchifier.Glitchify(message, glitchChance, jamChance), true, true), 0f, 0f).AddToQueue());
 
         /// <summary>
