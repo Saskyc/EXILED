@@ -109,6 +109,26 @@ namespace Exiled.API.Features.Pickups
         public int AmmoDrain { get; set; } = 1;
 
         /// <summary>
+        /// Gets or sets the damage for this <see cref="FirearmPickup"/>.
+        /// </summary>
+        public float Damage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the inaccuracy for this <see cref="FirearmPickup"/>.
+        /// </summary>
+        public float Inaccuracy { get; set; }
+
+        /// <summary>
+        /// Gets or sets the penetration for this <see cref="FirearmPickup"/>.
+        /// </summary>
+        public float Penetration { get; set; }
+
+        /// <summary>
+        /// Gets or sets how much fast the value drop over the distance.
+        /// </summary>
+        public float DamageFalloffDistance { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether the attachment code have this <see cref="FirearmPickup"/>.
         /// </summary>
         public uint Attachments
@@ -135,6 +155,11 @@ namespace Exiled.API.Features.Pickups
             {
                 MaxAmmo = firearm.PrimaryMagazine.ConstantMaxAmmo;
                 AmmoDrain = firearm.AmmoDrain;
+
+                Damage = firearm.Damage;
+                Inaccuracy = firearm.Inaccuracy;
+                Penetration = firearm.Penetration;
+                DamageFalloffDistance = firearm.DamageFalloffDistance;
             }
 
             base.ReadItemInfo(item);

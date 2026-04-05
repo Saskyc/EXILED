@@ -129,7 +129,7 @@ namespace Exiled.API.Features.Items
         public new BaseFirearm Base { get; }
 
         /// <summary>
-        /// Gets a primaty magazine for current firearm.
+        /// Gets a primary magazine for current firearm.
         /// </summary>
         public PrimaryMagazine PrimaryMagazine { get; }
 
@@ -814,6 +814,11 @@ namespace Exiled.API.Features.Items
             {
                 PrimaryMagazine.MaxAmmo = firearmPickup.MaxAmmo;
                 AmmoDrain = firearmPickup.AmmoDrain;
+
+                Damage = firearmPickup.Damage;
+                Inaccuracy = firearmPickup.Inaccuracy;
+                Penetration = firearmPickup.Penetration;
+                DamageFalloffDistance = firearmPickup.DamageFalloffDistance;
             }
         }
     }
